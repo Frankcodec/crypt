@@ -5,8 +5,7 @@ import {
   Percent,
   DollarSign,
   Mail,
-  Power,
-  AlertCircle,
+
 } from "lucide-react";
 import Swal from "sweetalert2";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Landmark, ArrowUpRight, ShieldCheck, AlertCircle, Info } from 'lucide-react';
+import { Landmark, ArrowUpRight, AlertCircle } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const WithdrawPage: React.FC = () => {

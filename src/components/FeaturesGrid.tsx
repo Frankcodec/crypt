@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, ProgressBar } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 
 const FeaturesGrid: React.FC = () => {

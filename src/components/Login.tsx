@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { User, Mail, Lock, UserPlus, ShieldCheck } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import {  Mail, Lock, UserPlus, ShieldCheck } from 'lucide-react';
 import Swal from 'sweetalert2';
 import DynamicNavbar from './Nav';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
 
     try {
       const response = await fetch('http://localhost/crypto-backend/login.php', {

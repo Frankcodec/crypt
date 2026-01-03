@@ -7,8 +7,7 @@ import {
   Search, 
   User as UserIcon, 
   DollarSign, 
-  TrendingUp,
-  ShieldCheck
+  TrendingUp
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';

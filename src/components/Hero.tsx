@@ -3,12 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import DynamicNavbar from './Nav';
 
 const Hero: React.FC = () => {
-  const stats = [
-    { val: "0.060", label: "Market Cap" },
-    { val: "1.05M", label: "Total Supply" },
-    { val: "7.08M", label: "Holders" },
-    { val: "1.02B", label: "Total Volume" }
-  ];
+
 
   return (
     <section id='home' className="hero-bg" style={{ 

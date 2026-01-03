@@ -9,8 +9,7 @@ import {
   User as UserIcon,
   Mail,
   Calendar,
-  PlusCircle,
-  DollarSign
+  PlusCircle
 } from 'lucide-react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Plus, EyeOff, TrendingUp, Clock, 
-  DollarSign, Loader2, Info, CheckCircle2, Trash2 
+  TrendingUp, Clock, 
+  DollarSign, Loader2, Info, Trash2 
 } from 'lucide-react';
 import Swal from 'sweetalert2';
 

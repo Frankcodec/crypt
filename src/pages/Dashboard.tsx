@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Users, UserCheck, FileText, Search, Bell, Moon, LogOut } from 'lucide-react';
+import {  Users, UserCheck, FileText } from 'lucide-react';
 import ReferralStats from '../components/Refer';
 
 const Dashboard: React.FC = () => {
@@ -34,10 +34,7 @@ const Dashboard: React.FC = () => {
       .catch(err => console.error("Error fetching data:", err));
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
+  
 
   if (loading) return <div className="d-flex justify-content-center mt-5"><div className="spinner-border text-primary"></div></div>;
 

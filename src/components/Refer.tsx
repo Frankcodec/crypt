@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Users, DollarSign, Share2 } from 'lucide-react';
+import { Copy, Users, DollarSign } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const ReferralStats: React.FC<{ userId: number }> = ({ userId }) => {

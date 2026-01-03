@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Check, X, ArrowDownCircle, ArrowUpCircle, 
-  RefreshCw, Copy, Search, AlertCircle, CheckCircle2 
+  X, ArrowDownCircle, ArrowUpCircle, 
+  RefreshCw, Copy, Search, CheckCircle2 
 } from 'lucide-react';
 import Swal from 'sweetalert2';
 

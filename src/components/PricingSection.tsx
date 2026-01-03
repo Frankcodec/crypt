@@ -13,7 +13,6 @@ interface InvestmentPlan {
 const PricingSection: React.FC = () => {
   const [plans, setPlans] = useState<InvestmentPlan[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // --- THE "TRICK" FUNCTION ---
   const formatDuration = (hours: number) => {
@@ -33,10 +32,10 @@ const PricingSection: React.FC = () => {
         if (data.success) {
           setPlans(data.plans);
         } else {
-          setError(data.message);
+        //   setError(data.message);
         }
       } catch (err) {
-        setError("Could not connect to the server.");
+        // setError("Could not connect to the server.");
       } finally {
         setLoading(false);
       }

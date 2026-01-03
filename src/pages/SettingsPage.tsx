@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  User, Lock, Shield, Smartphone, Mail, 
+  User, Shield, Smartphone, Mail, 
   CheckCircle, AlertTriangle, KeyRound, Bell 
 } from 'lucide-react';
 import Swal from 'sweetalert2';
