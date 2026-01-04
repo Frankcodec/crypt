@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { 
   Users, Activity, CreditCard, BarChart3, 
-  Settings, UserPlus, ShieldAlert, PlusCircle, Menu, X 
+  Settings, UserPlus, ShieldAlert, PlusCircle, Menu, X, 
+  Mail
 } from 'lucide-react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 
@@ -54,6 +55,7 @@ const AdminLayout: React.FC = () => {
           <AdminNavLink to="/admin/wallets" icon={<CreditCard size={18}/>} label="System Wallets" active={location.pathname === '/admin/wallets'} onClick={closeSidebar} />
           <AdminNavLink to="/admin/settings" icon={<Settings size={18}/>} label="Platform Settings" active={location.pathname === '/admin/settings'} onClick={closeSidebar} />
           <AdminNavLink to="/admin/approve-plans" icon={<BarChart3 size={18}/>} label="Approve Plans" active={location.pathname === '/admin/approve-plans'} onClick={closeSidebar} />
+          <AdminNavLink to="/admin/email" icon={<Mail size={18}/>} label="Email Panel" active={location.pathname === '/admin/email'} onClick={closeSidebar} />
         </nav>
       </div>
 
