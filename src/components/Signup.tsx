@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { User, Mail, Lock, UserPlus, ShieldCheck, KeyRound, ArrowLeft } from 'lucide-react';
+import { User, Mail, Lock, ShieldCheck, ArrowLeft } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const Signup: React.FC = () => {
