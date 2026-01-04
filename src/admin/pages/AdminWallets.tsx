@@ -12,7 +12,7 @@ const AdminWallets: React.FC = () => {
   const fetchWallets = async () => {
     setLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/get_wallets.php');
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/get_wallets.php');
       const data = await res.json();
       if (data.success) {
         setWallets(data.data);
@@ -33,7 +33,7 @@ const AdminWallets: React.FC = () => {
     e.preventDefault();
     setActionLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/add_wallet.php', {
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/add_wallet.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newWallet)
@@ -67,7 +67,7 @@ const AdminWallets: React.FC = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/delete_wallet.php', {
+        const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/delete_wallet.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id })

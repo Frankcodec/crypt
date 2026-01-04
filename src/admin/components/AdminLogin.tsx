@@ -16,7 +16,7 @@ const AdminLogin: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/auth/login.php', {
+      const response = await fetch('https://mondayonsol.fun/crypto-backend/admin/auth/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

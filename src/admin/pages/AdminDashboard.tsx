@@ -12,7 +12,7 @@ const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/get_dashboard_stats.php')
+    fetch('https://mondayonsol.fun/crypto-backend/admin/get_dashboard_stats.php')
       .then(res => res.json())
       .then(res => {
         if (res.success) setData(res);

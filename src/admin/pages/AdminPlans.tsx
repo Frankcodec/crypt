@@ -15,7 +15,7 @@ const AdminPlans: React.FC = () => {
   const fetchPlans = async () => {
     setLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/get_plans.php');
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/get_plans.php');
       const data = await res.json();
       if (data.success) setPlans(data.data);
     } catch (err) { 
@@ -39,7 +39,7 @@ const AdminPlans: React.FC = () => {
     }
 
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/add_plan.php', {
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/add_plan.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -81,7 +81,7 @@ const AdminPlans: React.FC = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/delete_plan.php', {
+        const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/delete_plan.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id })

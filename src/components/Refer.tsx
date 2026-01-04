@@ -18,7 +18,7 @@ const ReferralStats: React.FC<{ userId: number }> = ({ userId }) => {
             if (!userId || userId === 0) return;
 
             try {
-                const response = await fetch(`https://mondayonsol.fun/crypto-backend/crypto-backend/get_referral_stats.php?user_id=${userId}`);
+                const response = await fetch(`https://mondayonsol.fun/crypto-backend/get_referral_stats.php?user_id=${userId}`);
                 const result = await response.json();
 
 

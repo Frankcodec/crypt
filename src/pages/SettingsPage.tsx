@@ -33,7 +33,7 @@ const SettingsPage: React.FC = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/update_password.php', {
+      const response = await fetch('https://mondayonsol.fun/crypto-backend/update_password.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

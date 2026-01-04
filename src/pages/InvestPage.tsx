@@ -78,7 +78,7 @@ const PaymentModal = ({ show, onClose, amount, plan, refreshData }: any) => {
 
   useEffect(() => {
     if (show) {
-      fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/get_admin_wallets.php')
+      fetch('https://mondayonsol.fun/crypto-backend/get_admin_wallets.php')
         .then(res => res.json())
         .then(data => {
           if (data.success) {
@@ -123,7 +123,7 @@ const PaymentModal = ({ show, onClose, amount, plan, refreshData }: any) => {
 
       console.log('Sending payload:', payload);
 
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/purchase_plan.php', {
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/purchase_plan.php', {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
@@ -217,9 +217,9 @@ const InvestPage: React.FC = () => {
   const fetchData = async () => {
     try {
       const [pRes, mRes, bRes] = await Promise.all([
-        fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/get_plans.php'),
-        fetch(`https://mondayonsol.fun/crypto-backend/crypto-backend/get_my_investments.php?user_id=${user.id}`),
-        fetch(`https://mondayonsol.fun/crypto-backend/crypto-backend/get_dashboard_data.php?user_id=${user.id}`)
+        fetch('https://mondayonsol.fun/crypto-backend/get_plans.php'),
+        fetch(`https://mondayonsol.fun/crypto-backend/get_my_investments.php?user_id=${user.id}`),
+        fetch(`https://mondayonsol.fun/crypto-backend/get_dashboard_data.php?user_id=${user.id}`)
       ]);
       const p = await pRes.json();
       const m = await mRes.json();
@@ -258,7 +258,7 @@ const InvestPage: React.FC = () => {
             network: 'Internal'
           };
 
-          const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/purchase_plan.php', {
+          const res = await fetch('https://mondayonsol.fun/crypto-backend/purchase_plan.php', {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },

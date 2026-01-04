@@ -28,7 +28,7 @@ const UserDetails: React.FC = () => {
 
   const fetchFullDetails = async () => {
     try {
-      const res = await fetch(`https://mondayonsol.fun/crypto-backend/crypto-backend/admin/get_user_full_details.php?id=${id}`);
+      const res = await fetch(`https://mondayonsol.fun/crypto-backend/admin/get_user_full_details.php?id=${id}`);
       const result = await res.json();
       
       if (result.success) {
@@ -72,7 +72,7 @@ const UserDetails: React.FC = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/manual_deposit.php', {
+          const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/manual_deposit.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

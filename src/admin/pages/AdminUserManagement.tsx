@@ -33,7 +33,7 @@ const AdminUserManagement: React.FC = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/get_all_users.php');
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/get_all_users.php');
       const data = await res.json();
       if (data.success) {
         setUsers(data.users);
@@ -64,7 +64,7 @@ const AdminUserManagement: React.FC = () => {
     }).then(async (result) => {
       if (result.isConfirmed && result.value) {
         try {
-          const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/update_user_balance.php', {
+          const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/update_user_balance.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ user_id: user.id, amount: result.value })
