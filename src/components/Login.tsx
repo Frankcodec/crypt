@@ -26,15 +26,15 @@ const Login: React.FC = () => {
         localStorage.setItem('user', JSON.stringify(data.user));
         // Redirect to dashboard
         Swal.fire({
-                  title: 'Account Created!',
-                  text: 'You can now log in to start investing.',
+                  title: 'Login Successful!',
+                  text: 'You can now start investing.',
                   icon: 'success',
                   confirmButtonColor: '#0d6efd'
                 }).then(() => {
                   navigate('/dashboard');
                 });
       } else {
-        Swal.fire('Signup Failed', data.message, 'error');
+        Swal.fire('Login Failed', data.message, 'error');
       }
     } catch (err) {
       Swal.fire('Error', 'Could not connect to the server.', 'error');
@@ -42,24 +42,6 @@ const Login: React.FC = () => {
   };
 
   return (
-    // <div className="container d-flex justify-content-center align-items-center vh-100">
-    //   <form onSubmit={handleLogin} className="card p-4 shadow-sm" style={{ width: '350px' }}>
-    //     <h3 className="text-center mb-4">Login</h3>
-    //     {error && <div className="alert alert-danger p-2 small">{error}</div>}
-        
-    //     <div className="mb-3">
-    //       <label className="form-label small fw-bold">Email</label>
-    //       <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
-    //     </div>
-
-    //     <div className="mb-3">
-    //       <label className="form-label small fw-bold">Password</label>
-    //       <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
-    //     </div>
-
-    //     <button type="submit" className="btn btn-primary w-100">Sign In</button>
-    //   </form>
-    // </div>
 
     <div className="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
       <DynamicNavbar />
