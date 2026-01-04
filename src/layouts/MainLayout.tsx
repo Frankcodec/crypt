@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, Wallet, ArrowDownCircle, LogOut, 
-  Settings, Bell, CreditCard, ChevronDown, Menu, X 
+  Settings, Bell, CreditCard, Menu, X 
 } from 'lucide-react';
 
 const MainLayout: React.FC = () => {
