@@ -155,7 +155,7 @@ const MainLayout: React.FC = () => {
         </header>
 
         {/* PAGE CONTENT */}
-        <main className="p-3 p-md-4 flex-grow-1" style={{ paddingBottom: '80px' }}>
+        <main className="py-3 px-lg-3 px-2  p-md-4 flex-grow-1" style={{ paddingBottom: '80px' }}>
           <Outlet />
         </main>
 

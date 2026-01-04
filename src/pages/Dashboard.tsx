@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
 
           {/* REFERRAL STATS */}
           <div className="row g-4 mt-4">
-            <div className="col-lg-12 col-md-6">
+            <div className="col-12">
               <ReferralStats userId={userData.id} />
             </div>
           </div>
