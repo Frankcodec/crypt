@@ -3,10 +3,10 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const TeamSection: React.FC = () => {
   const members = [
-    { name: "John Doe", role: "CEO & Founder" },
+    { name: "Louis Baker", role: "CEO & Founder", image: "./ceo.jpg" },
     { name: "Jane Smith", role: "Blockchain Dev" },
     { name: "Mike Ross", role: "UI/UX Designer" },
-    { name: "Sarah Connor", role: "Marketing" }
+    { name: "Sarah Connor", role: "Marketing"}
   ];
 
   return (
@@ -19,7 +19,7 @@ const TeamSection: React.FC = () => {
           {members.map((m, i) => (
             <Col md={3} key={i} className="mb-4">
               <div className="team-card">
-                <img src={`https://i.pravatar.cc/150?u=${i}`} alt={m.name} className="rounded-circle border-glow mb-3" width="120" />
+                <img src={!m.image ? `https://i.pravatar.cc/150?u=${i}` : m.image} alt={m.name} className="rounded-circle border-glow mb-3" width="120" />
                 <h5>{m.name}</h5>
                 <p className="text-secondary">{m.role}</p>
               </div>

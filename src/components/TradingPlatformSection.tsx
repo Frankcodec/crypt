@@ -9,8 +9,8 @@ const TradingPlatformSection: React.FC = () => {
           <p className="text-accent fw-semibold mb-2">Try our Platform</p>
           <h2 className="text-white fw-bold">Our Trading Platform</h2>
           <p className="text-muted mx-auto mt-3" style={{ maxWidth: 620 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis
-            accumsan nisi ut felis congue nisl hendrerit commodo.
+            Experience a seamless trading journey with our intuitive and
+            feature-rich platform designed for traders of all levels.
           </p>
         </div>
 

@@ -7,7 +7,7 @@ const Footer = () => (
     <Container>
       <Row>
         <Col md={4}>
-          <h3 className="text-gradient">NOSAR</h3>
+          <h3 className="text-gradient">FLUX WEALTH</h3>
           <p className="text-secondary">Revolutionizing the way you trade assets on the blockchain.</p>
         </Col>
         <Col md={2}>

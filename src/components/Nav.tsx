@@ -18,7 +18,7 @@ const DynamicNavbar: React.FC = () => {
       <Navbar expand="lg" className="dynamic-island mt-3">
         <Container fluid className="px-4">
           <Navbar.Brand href="#home" className="text-white fw-bold">
-            NOSAR<span className="text-primary-gradient">-T</span>
+            FLUX<span className="text-primary-gradient">WEALTH</span>
           </Navbar.Brand>
           
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0 shadow-none">

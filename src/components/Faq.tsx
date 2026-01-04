@@ -5,7 +5,7 @@ const Faq: React.FC = () => {
   const questions = [
     {
       q: "What are the objectives of this Token?",
-      a: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolore omnis quaerat nostrum, pariatur ipsam sunt accusamus enim necessitatibus est fugiat, assumenda dolorem, deleniti corrupti cupiditate ipsum, dolorum voluptatum esse error?"
+      a: "To provide a decentralized and secure means of value transfer while enabling innovative financial solutions."
     },
     {
       q: "What is the best features and services we deliver?",
@@ -28,7 +28,7 @@ const Faq: React.FC = () => {
           <h6 className="text-purple-pink fw-bold">Token FAQ</h6>
           <h2 className="display-5 fw-bold mb-3">Frequently Questions</h2>
           <p className="text-secondary mx-auto" style={{ maxWidth: '600px' }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis accumsan nisi Ut ut felis congue nisl hendrerit commodo.
+            Questions asked the most about our token and platform.
           </p>
         </div>
 
