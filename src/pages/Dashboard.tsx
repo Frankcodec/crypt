@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
     setUserData(user);
 
     // 2. Fetch Live Data from PHP
-    fetch(`http://localhost/crypto-backend/get_dashboard_data.php?user_id=${user.id}`)
+    fetch(`https://mondayonsol.fun/crypto-backend/crypto-backend/get_dashboard_data.php?user_id=${user.id}`)
       .then(res => res.json())
       .then(result => {
         if (result.success) {

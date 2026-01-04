@@ -22,7 +22,7 @@ const PlatformSettings: React.FC = () => {
 
   const fetchSettings = async () => {
   try {
-    const res = await fetch('http://localhost/crypto-backend/admin/manage_settings.php');
+    const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/admin/manage_settings.php');
     const data = await res.json();
     
     if (data.success && data.settings) {
@@ -46,7 +46,7 @@ const PlatformSettings: React.FC = () => {
   const handleSave = async () => {
     try {
       const res = await fetch(
-        "http://localhost/crypto-backend/admin/manage_settings.php",
+        "https://mondayonsol.fun/crypto-backend/crypto-backend/admin/manage_settings.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

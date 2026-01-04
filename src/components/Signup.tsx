@@ -38,7 +38,7 @@ const Signup: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost/crypto-backend/signup.php', {
+      const response = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/signup.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

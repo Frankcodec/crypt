@@ -15,7 +15,7 @@ const DepositModal = ({ show, onClose, amount, refreshData }: any) => {
 
   useEffect(() => {
     if (show) {
-      fetch('http://localhost/crypto-backend/get_admin_wallets.php')
+      fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/get_admin_wallets.php')
         .then(res => res.json())
         .then(data => {
           if (data.success) {
@@ -30,7 +30,7 @@ const DepositModal = ({ show, onClose, amount, refreshData }: any) => {
     MySwal.fire({ title: 'Logging Deposit...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
     
     try {
-      const res = await fetch('http://localhost/crypto-backend/log_deposit.php', {
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/log_deposit.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -103,7 +103,7 @@ const DepositPage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   const fetchHistory = async () => {
-    const res = await fetch(`http://localhost/crypto-backend/get_transactions.php?user_id=${user.id}&type=deposit`);
+    const res = await fetch(`https://mondayonsol.fun/crypto-backend/crypto-backend/get_transactions.php?user_id=${user.id}&type=deposit`);
     const data = await res.json();
     if (data.success) setRecentDeposits(data.data);
   };

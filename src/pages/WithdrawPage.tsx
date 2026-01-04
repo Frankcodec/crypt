@@ -11,7 +11,7 @@ const WithdrawPage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   useEffect(() => {
-    fetch(`http://localhost/crypto-backend/get_dashboard_data.php?user_id=${user.id}`)
+    fetch(`https://mondayonsol.fun/crypto-backend/crypto-backend/get_dashboard_data.php?user_id=${user.id}`)
       .then(res => res.json())
       .then(data => { if (data.success) setBalance(data.balance); });
   }, []);
@@ -28,7 +28,7 @@ const WithdrawPage: React.FC = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost/crypto-backend/withdraw.php', {
+      const res = await fetch('https://mondayonsol.fun/crypto-backend/crypto-backend/withdraw.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
