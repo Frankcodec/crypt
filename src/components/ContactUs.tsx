@@ -27,8 +27,7 @@ const ContactUs: React.FC = () => {
             <h6 className="text-uppercase fw-bold text-accent mb-3">Contact us</h6>
             <h2 className="display-4 fw-bold text-white mb-4">Contact With Us</h2>
             <p className="text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis 
-              accumsan nisi Ut ut felis congue nisl hendrerit commodo.
+              We're here to help and answer any questions you might have. Reach out to us and we'll respond as soon as we can.
             </p>
           </div>
         </div>
@@ -95,7 +94,7 @@ const ContactUs: React.FC = () => {
                 </div>
                 <div className="col-12 text-center mt-5">
                   <button type="submit" className="btn-gradient-submit">
-                    SEND MESSAGE
+                    CONTACT SUPPORT
                   </button>
                 </div>
               </div>
