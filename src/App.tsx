@@ -20,6 +20,7 @@ import PlatformSettings from './admin/pages/PlatformSettings';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLogin from './admin/components/AdminLogin';
 import LandingPage from './layouts/LandingPage';
+import AdminEmailPanel from './admin/pages/AdminEmailPanel';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
             <Route path="users" element={<AdminUserManagement />} />
             <Route path="user/:id" element={<UserDetails />} />
             <Route path="settings" element={<PlatformSettings />} />
+            <Route path="email" element={<AdminEmailPanel />} />
           </Route>
         </Route>
         <Route path="/admin-login" element={<AdminLogin />} />
