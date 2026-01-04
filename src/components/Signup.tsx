@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { User, Mail, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
+import { User, Mail, Lock, ShieldCheck, ArrowLeft } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const Signup: React.FC = () => {
@@ -12,7 +12,7 @@ const Signup: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState('');
   
-  // Timer States for Resend logic
+  // Timer States
   const [timer, setTimer] = useState(0);
   const [canResend, setCanResend] = useState(true);
 
@@ -25,7 +25,7 @@ const Signup: React.FC = () => {
 
   const [refId, setRefId] = useState<string | null>(null);
 
-  // 1. Detect Referral & Handle Countdown Timer
+  // 1. Detect Referral & Handle Timer
   useEffect(() => {
     const r = searchParams.get('ref');
     if (r) setRefId(r);
@@ -37,7 +37,7 @@ const Signup: React.FC = () => {
       }, 1000);
     } else {
       setCanResend(true);
-      if (interval) clearInterval(interval);
+      clearInterval(interval);
     }
     return () => clearInterval(interval);
   }, [searchParams, timer]);
@@ -46,32 +46,27 @@ const Signup: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // --- ACTION: SEND/RESEND OTP ---
+  // --- ACTION: SEND OTP ---
   const handleSendCode = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    
-    // Explicitly grab email from state to avoid undefined errors
-    const emailToSend = formData.email;
-    if (!emailToSend) return Swal.fire('Error', 'Please enter your email.', 'error');
-    if (!canResend || loading) return;
+    if (!formData.email || !canResend) return;
 
     setLoading(true);
     try {
       const res = await fetch('https://mondayonsol.fun/crypto-backend/send_otp.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: emailToSend }),
+        body: JSON.stringify({ email: formData.email }),
       });
       const data = await res.json();
       
       if (data.success) {
         setStep(2);
         setCanResend(false);
-        setTimer(60); // Reset to 60 seconds
-        
+        setTimer(60); 
         Swal.fire({
           title: 'Code Sent!',
-          text: 'Check your email (and spam folder).',
+          text: 'Please check your inbox (and spam folder).',
           icon: 'success',
           toast: true,
           position: 'top-end',
@@ -82,7 +77,7 @@ const Signup: React.FC = () => {
         Swal.fire('Error', data.message, 'error');
       }
     } catch (error) {
-      Swal.fire('Error', 'Connection failed. Check your internet or server.', 'error');
+      Swal.fire('Error', 'Connection failed. Check your API path.', 'error');
     } finally {
       setLoading(false);
     }
@@ -102,7 +97,7 @@ const Signup: React.FC = () => {
       if (data.success) {
         setStep(3);
       } else {
-        Swal.fire('Invalid Code', data.message || 'Incorrect verification code.', 'error');
+        Swal.fire('Invalid Code', data.message || 'The code you entered is incorrect.', 'error');
       }
     } catch (error) {
       Swal.fire('Error', 'Verification failed.', 'error');
@@ -148,127 +143,113 @@ const Signup: React.FC = () => {
       <div className="card shadow-lg border-0 rounded-4 overflow-hidden" style={{ maxWidth: '900px', width: '100%' }}>
         <div className="row g-0">
           
-          {/* LEFT SIDE: BRANDING */}
+          {/* LEFT SIDE: DECORATION */}
           <div className="col-md-5 bg-primary d-none d-md-flex align-items-center justify-content-center text-white p-5 text-center">
             <div>
               <ShieldCheck size={80} className="mb-4 opacity-75" />
               <h2 className="fw-bold">Secured Platform</h2>
-              <p className="opacity-75">We verify every user to maintain the integrity of our audit ecosystem.</p>
+              <p className="opacity-75">We use bank-grade encryption to protect your investment journey.</p>
               {refId && (
-                <div className="badge bg-white text-primary px-3 py-2 mt-3 rounded-pill shadow-sm">
-                  Referral Reward Active 🎁
+                <div className="badge bg-white text-primary px-3 py-2 mt-3 rounded-pill">
+                  Referral Reward Applied 🎁
                 </div>
               )}
             </div>
           </div>
 
-          {/* RIGHT SIDE: FORMS */}
+          {/* RIGHT SIDE: FORM */}
           <div className="col-md-7 bg-white p-4 p-md-5">
             
             {/* STEP 1: COLLECT EMAIL */}
             {step === 1 && (
-              <div className="animate-fade-in">
-                <h3 className="fw-bold mb-1 text-dark">Join Us</h3>
-                <p className="text-muted mb-4 small">Enter your email to get started.</p>
-                <form onSubmit={handleSendCode}>
-                  <div className="mb-4">
-                    <label className="form-label small fw-bold">Email Address</label>
-                    <div className="input-group">
-                      <span className="input-group-text bg-light border-end-0"><Mail size={18} className="text-muted"/></span>
-                      <input 
-                        type="email" 
-                        name="email" 
-                        value={formData.email} 
-                        className="form-control bg-light border-start-0" 
-                        placeholder="your@email.com"
-                        required 
-                        onChange={handleChange} 
-                      />
-                    </div>
-                  </div>
-                  <button type="submit" disabled={loading} className="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow-sm d-flex justify-content-center align-items-center">
-                    {loading ? <Loader2 className="animate-spin me-2" size={20} /> : 'Continue'}
-                  </button>
-                </form>
-              </div>
-            )}
-
-            {/* STEP 2: OTP VERIFICATION */}
-            {step === 2 && (
-              <div className="animate-fade-in text-center">
-                <button type="button" onClick={() => setStep(1)} className="btn btn-sm btn-link text-decoration-none p-0 mb-3 d-flex align-items-center gap-1 text-muted mx-auto">
-                  <ArrowLeft size={14}/> Change Email
-                </button>
-                <h3 className="fw-bold mb-1 text-dark">Check Your Inbox</h3>
-                <p className="text-muted mb-4 small">Verification code sent to: <br/> <b>{formData.email}</b></p>
-                
-                <form onSubmit={handleVerifyCode}>
-                  <div className="mb-4">
+              <form onSubmit={handleSendCode}>
+                <h3 className="fw-bold mb-1">Get Started</h3>
+                <p className="text-muted mb-4 small">Enter your email to receive a verification code.</p>
+                <div className="mb-4">
+                  <label className="form-label small fw-bold">Email Address</label>
+                  <div className="input-group">
+                    <span className="input-group-text bg-light border-end-0"><Mail size={18} className="text-muted"/></span>
                     <input 
-                      type="text" 
-                      maxLength={6} 
-                      className="form-control bg-light text-center fw-bold fs-2 py-3 border-2 border-primary border-opacity-25" 
-                      placeholder="000000" 
-                      style={{ letterSpacing: '8px' }}
+                      type="email" 
+                      name="email" 
+                      value={formData.email} 
+                      className="form-control bg-light border-start-0" 
+                      placeholder="name@example.com"
                       required 
-                      onChange={(e) => setOtp(e.target.value)} 
+                      onChange={handleChange} 
                     />
                   </div>
-                  
-                  <button type="submit" disabled={loading} className="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow-sm mb-3">
-                    {loading ? 'Verifying...' : 'Verify Code'}
-                  </button>
-                </form>
-
-                {/* RESEND SECTION */}
-                <div className="mt-2">
-                  {canResend ? (
-                    <button 
-                      type="button" 
-                      className="btn btn-link btn-sm text-primary fw-bold text-decoration-none d-inline-flex align-items-center gap-2" 
-                      onClick={() => handleSendCode()}
-                      disabled={loading}
-                    >
-                      {loading && <span className="spinner-border spinner-border-sm"></span>}
-                      Resend Code
-                    </button>
-                  ) : (
-                    <div className="p-2 bg-light rounded-pill d-inline-block px-3">
-                      <span className="text-muted small">Resend available in <b className="text-primary">{timer}s</b></span>
-                    </div>
-                  )}
                 </div>
-              </div>
+                <button type="submit" disabled={loading} className="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow-sm">
+                  {loading ? <span className="spinner-border spinner-border-sm me-2"></span> : 'Continue'}
+                </button>
+              </form>
             )}
 
-            {/* STEP 3: ACCOUNT DETAILS */}
+            {/* STEP 2: VERIFY OTP */}
+            {step === 2 && (
+              <form onSubmit={handleVerifyCode}>
+                <button type="button" onClick={() => setStep(1)} className="btn btn-sm btn-link text-decoration-none p-0 mb-3 d-flex align-items-center gap-1 text-muted">
+                  <ArrowLeft size={14}/> Change Email
+                </button>
+                <h3 className="fw-bold mb-1">Verify Inbox</h3>
+                <p className="text-muted mb-4 small">Sent to: <b>{formData.email}</b></p>
+                <div className="mb-4 text-center">
+                  <input 
+                    type="text" 
+                    maxLength={6} 
+                    className="form-control bg-light text-center fw-bold fs-3 py-3" 
+                    placeholder="000000" 
+                    style={{ letterSpacing: '10px' }}
+                    required 
+                    onChange={(e) => setOtp(e.target.value)} 
+                  />
+                </div>
+                <button type="submit" disabled={loading} className="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow-sm mb-3">
+                  {loading ? 'Verifying...' : 'Verify Code'}
+                </button>
+                <div className="text-center">
+                  {canResend ? (
+                    <button type="button" className="btn btn-link btn-sm text-decoration-none fw-bold" onClick={() => handleSendCode()}>Resend Code</button>
+                  ) : (
+                    <span className="text-muted small">Resend in <b className="text-primary">{timer}s</b></span>
+                  )}
+                </div>
+              </form>
+            )}
+
+            {/* STEP 3: FINAL DETAILS */}
             {step === 3 && (
-              <div className="animate-fade-in">
+              <form onSubmit={handleSubmit}>
                 <h3 className="fw-bold mb-1 text-success">Verified! ✅</h3>
-                <p className="text-muted mb-4 small">Complete your registration to continue.</p>
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label className="form-label small fw-bold">Full Name</label>
+                <p className="text-muted mb-4 small">Complete your profile to start earning.</p>
+                <div className="mb-3">
+                  <label className="form-label small fw-bold">Full Name</label>
+                  <div className="input-group">
+                    <span className="input-group-text bg-light border-end-0"><User size={18} className="text-muted"/></span>
+                    <input type="text" name="full_name" className="form-control bg-light border-start-0" placeholder="John Doe" required onChange={handleChange} />
+                  </div>
+                </div>
+                <div className="row mb-4 g-3">
+                  <div className="col-md-6">
+                    <label className="form-label small fw-bold">Password</label>
                     <div className="input-group">
-                      <span className="input-group-text bg-light border-end-0"><User size={18} className="text-muted"/></span>
-                      <input type="text" name="full_name" className="form-control bg-light border-start-0" placeholder="John Doe" required onChange={handleChange} />
+                      <span className="input-group-text bg-light border-end-0"><Lock size={18} className="text-muted"/></span>
+                      <input type="password" name="password" className="form-control bg-light border-start-0" required onChange={handleChange} />
                     </div>
                   </div>
-                  <div className="row mb-4 g-3">
-                    <div className="col-md-6">
-                      <label className="form-label small fw-bold">Password</label>
-                      <input type="password" name="password" className="form-control bg-light" required onChange={handleChange} />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label small fw-bold">Confirm Password</label>
-                      <input type="password" name="confirmPassword" className="form-control bg-light" required onChange={handleChange} />
+                  <div className="col-md-6">
+                    <label className="form-label small fw-bold">Confirm</label>
+                    <div className="input-group">
+                      <span className="input-group-text bg-light border-end-0"><Lock size={18} className="text-muted"/></span>
+                      <input type="password" name="confirmPassword" className="form-control bg-light border-start-0" required onChange={handleChange} />
                     </div>
                   </div>
-                  <button type="submit" disabled={loading} className="btn btn-success w-100 py-3 fw-bold rounded-3 shadow-sm">
-                    {loading ? 'Finalizing...' : 'Complete Registration'}
-                  </button>
-                </form>
-              </div>
+                </div>
+                <button type="submit" disabled={loading} className="btn btn-success w-100 py-3 fw-bold rounded-3 shadow-sm">
+                  {loading ? 'Creating Account...' : 'Complete Registration'}
+                </button>
+              </form>
             )}
 
             <div className="mt-4 text-center">
@@ -279,14 +260,6 @@ const Signup: React.FC = () => {
           </div>
         </div>
       </div>
-      
-      {/* Simple CSS animation for transitions */}
-      <style>{`
-        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-spin { animation: spin 1s linear infinite; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
     </div>
   );
 };
