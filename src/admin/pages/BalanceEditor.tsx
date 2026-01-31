@@ -12,7 +12,7 @@ const BalanceEditor = () => {
 
   // Load user list
   useEffect(() => {
-    fetch('https://mondayonsol.fun/crypto-backend/get_users_list.php')
+    fetch('https://mondayonsol.fun/crypto-backend/admin/get_users_list.php')
       .then(res => res.json())
       .then(data => { if (data.success) setUsers(data.users); });
   }, []);
