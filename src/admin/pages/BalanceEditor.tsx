@@ -1,28 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { DollarSign, Save, AlertCircle } from 'lucide-react';
+import { DollarSign, RefreshCcw } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const BalanceEditor = () => {
   const [users, setUsers] = useState<any[]>([]);
   const [selectedUser, setSelectedUser] = useState('');
+  const [currentBalance, setCurrentBalance] = useState<number | null>(null);
   const [newAmount, setNewAmount] = useState('');
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
+  // Load user list
   useEffect(() => {
-    fetch('https://mondayonsol.fun/crypto-backend/admin/get_users_list.php')
+    fetch('https://mondayonsol.fun/crypto-backend/get_users_list.php')
       .then(res => res.json())
       .then(data => { if (data.success) setUsers(data.users); });
   }, []);
 
+  // Fetch specific user balance when selected
+  useEffect(() => {
+    if (!selectedUser) {
+      setCurrentBalance(null);
+      return;
+    }
+    
+    setFetching(true);
+    fetch(`https://mondayonsol.fun/crypto-backend/admin/get_user_balance.php?user_id=${selectedUser}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) setCurrentBalance(data.balance);
+        setFetching(false);
+      });
+  }, [selectedUser]);
+
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     const result = await Swal.fire({
-      title: 'Are you sure?',
-      text: `This will overwrite the user's current balance to $${newAmount}`,
+      title: 'Confirm Overwrite',
+      text: `Change balance from $${currentBalance} to $${newAmount}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, update it'
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Yes, Update Balance'
     });
 
     if (!result.isConfirmed) return;
@@ -40,13 +59,12 @@ const BalanceEditor = () => {
       });
       const data = await res.json();
       if (data.success) {
-        Swal.fire('Updated!', data.message, 'success');
+        Swal.fire('Success', 'Balance updated!', 'success');
+        setCurrentBalance(parseFloat(newAmount)); // Update UI display
         setNewAmount('');
-      } else {
-        Swal.fire('Failed', data.message, 'error');
       }
     } catch (err) {
-      Swal.fire('Error', 'Server connection error', 'error');
+      Swal.fire('Error', 'Update failed', 'error');
     } finally {
       setLoading(false);
     }
@@ -54,17 +72,14 @@ const BalanceEditor = () => {
 
   return (
     <div className="card border-0 shadow-sm rounded-4 p-4">
-      <div className="mb-4 d-flex align-items-center gap-2">
-        <DollarSign className="text-success" />
-        <h5 className="mb-0 fw-bold">Master Balance Editor</h5>
-      </div>
-
-      <div className="alert alert-info border-0 small">
-        <AlertCircle size={16} className="me-2"/>
-        Warning: This directly overwrites the <b>total_balance</b> in both the <code>users</code> and <code>balances</code> tables.
+      <div className="mb-4">
+        <h5 className="fw-bold d-flex align-items-center gap-2">
+          <DollarSign className="text-success" /> Master Balance Editor
+        </h5>
       </div>
 
       <form onSubmit={handleUpdate}>
+        {/* USER SELECTION */}
         <div className="mb-3">
           <label className="form-label small fw-bold">Select User</label>
           <select 
@@ -80,10 +95,30 @@ const BalanceEditor = () => {
           </select>
         </div>
 
+        {/* CURRENT BALANCE DISPLAY */}
+        {selectedUser && (
+          <div className="p-3 rounded-3 bg-light border mb-4 d-flex justify-content-between align-items-center">
+            <div>
+              <div className="text-muted small fw-bold uppercase">Current Balance</div>
+              {fetching ? (
+                <div className="spinner-border spinner-border-sm text-primary"></div>
+              ) : (
+                <h3 className="mb-0 fw-bold text-dark">${currentBalance?.toLocaleString()}</h3>
+              )}
+            </div>
+            <RefreshCcw 
+              size={18} 
+              className={`text-muted cursor-pointer ${fetching ? 'animate-spin' : ''}`} 
+              onClick={() => setSelectedUser(selectedUser)} 
+            />
+          </div>
+        )}
+
+        {/* NEW BALANCE INPUT */}
         <div className="mb-4">
           <label className="form-label small fw-bold">New Absolute Balance ($)</label>
           <div className="input-group">
-            <span className="input-group-text bg-light border-end-0">$</span>
+            <span className="input-group-text bg-light border-end-0 text-muted">$</span>
             <input 
               type="number" 
               step="0.01"
@@ -96,8 +131,8 @@ const BalanceEditor = () => {
           </div>
         </div>
 
-        <button type="submit" disabled={loading} className="btn btn-dark w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2">
-          {loading ? <span className="spinner-border spinner-border-sm"></span> : <><Save size={18}/> Overwrite Balance</>}
+        <button type="submit" disabled={loading || fetching} className="btn btn-dark w-100 py-3 fw-bold rounded-3">
+          {loading ? 'Processing...' : 'Overwrite Balance'}
         </button>
       </form>
     </div>
