@@ -21,6 +21,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminLogin from './admin/components/AdminLogin';
 import LandingPage from './layouts/LandingPage';
 import AdminEmailPanel from './admin/pages/AdminEmailPanel';
+import BalanceEditor from './admin/pages/BalanceEditor';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="user/:id" element={<UserDetails />} />
             <Route path="settings" element={<PlatformSettings />} />
             <Route path="email" element={<AdminEmailPanel />} />
+            <Route path="balance-editor" element={<BalanceEditor />} />
           </Route>
         </Route>
         <Route path="/admin-login" element={<AdminLogin />} />
