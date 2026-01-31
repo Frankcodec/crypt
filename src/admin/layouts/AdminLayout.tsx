@@ -56,6 +56,7 @@ const AdminLayout: React.FC = () => {
           <AdminNavLink to="/admin/settings" icon={<Settings size={18}/>} label="Platform Settings" active={location.pathname === '/admin/settings'} onClick={closeSidebar} />
           <AdminNavLink to="/admin/approve-plans" icon={<BarChart3 size={18}/>} label="Approve Plans" active={location.pathname === '/admin/approve-plans'} onClick={closeSidebar} />
           <AdminNavLink to="/admin/email" icon={<Mail size={18}/>} label="Email Panel" active={location.pathname === '/admin/email'} onClick={closeSidebar} />
+          <AdminNavLink to="/admin/balance-editor" icon={<CreditCard size={18}/>} label="Balance Editor" active={location.pathname === '/admin/balance-editor'} onClick={closeSidebar} />
         </nav>
       </div>
 
