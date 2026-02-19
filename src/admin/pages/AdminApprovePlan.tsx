@@ -23,7 +23,7 @@ const AdminApprovePlan: React.FC = () => {
 
   const fetchInvestments = async () => {
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/get_all_investments.php');
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/admin/get_all_investments.php');
       const data = await res.json();
       if (data.success) {
         setInvestments(data.investments);
@@ -50,7 +50,7 @@ const AdminApprovePlan: React.FC = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`https://mondayonsol.fun/crypto-backend/admin/${action}_investment.php`, {
+        const res = await fetch(`https://api.nutcoinonsol.com/crypto-backend/admin/${action}_investment.php`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ investment_id: id })

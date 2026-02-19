@@ -15,7 +15,7 @@ const AdminEmailPanel = () => {
 
   // Fetch users on load
   useEffect(() => {
-    fetch('https://mondayonsol.fun/crypto-backend/admin/get_users_list.php')
+    fetch('https://api.nutcoinonsol.com/crypto-backend/admin/get_users_list.php')
       .then(res => res.json())
       .then(data => {
         if (data.success) setUsers(data.users);
@@ -28,7 +28,7 @@ const AdminEmailPanel = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/admin_send_email.php', {
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/admin/admin_send_email.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(emailData)

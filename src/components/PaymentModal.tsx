@@ -15,7 +15,7 @@ const PaymentModal: React.FC<Props> = ({ show, onClose, amount }) => {
 
   useEffect(() => {
     // Fetch wallets from your new backend script
-    fetch('https://mondayonsol.fun/crypto-backend/get_admin_wallets.php')
+    fetch('https://api.nutcoinonsol.com/crypto-backend/get_admin_wallets.php')
       .then(res => res.json())
       .then(data => {
         if (data.success) {

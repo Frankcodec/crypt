@@ -17,7 +17,7 @@ const MainLayout: React.FC = () => {
   const fetchNotifications = async () => {
     if (!user.id) return;
     try {
-      const res = await fetch(`https://mondayonsol.fun/crypto-backend/get_notifications.php?user_id=${user.id}`);
+      const res = await fetch(`https://api.nutcoinonsol.com/crypto-backend/get_notifications.php?user_id=${user.id}`);
       const data = await res.json();
       if (data.success) {
         setNotifications(data.data.list || []);
@@ -29,7 +29,7 @@ const MainLayout: React.FC = () => {
   const markNotificationsAsRead = async () => {
     if (unreadCount === 0) return;
     try {
-      await fetch(`https://mondayonsol.fun/mark_notifications_read.php`, {
+      await fetch(`https://api.nutcoinonsol.com/mark_notifications_read.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: user.id })

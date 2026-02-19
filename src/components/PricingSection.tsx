@@ -27,7 +27,7 @@ const PricingSection: React.FC = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await fetch('https://mondayonsol.fun/crypto-backend/get_plans.php');
+        const response = await fetch('https://api.nutcoinonsol.com/crypto-backend/get_plans.php');
         const data = await response.json();
         if (data.success) {
           setPlans(data.plans);

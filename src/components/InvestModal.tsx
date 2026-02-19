@@ -25,7 +25,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ show, onClose, amount, plan
 
   useEffect(() => {
     if (show) {
-      fetch('https://mondayonsol.fun/crypto-backend/get_admin_wallets.php')
+      fetch('https://api.nutcoinonsol.com/crypto-backend/get_admin_wallets.php')
         .then(res => res.json())
         .then(data => {
           if (data.success && data.wallets.length > 0) {
@@ -61,7 +61,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ show, onClose, amount, plan
 
       console.log("Sending Crypto Purchase Payload:", payload);
 
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/purchase_plan.php', {
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/purchase_plan.php', {
         method: 'POST', // CRITICAL: Must be POST
         headers: {
           'Content-Type': 'application/json',

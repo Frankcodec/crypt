@@ -13,7 +13,7 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://mondayonsol.fun/crypto-backend/login.php', {
+      const response = await fetch('https://api.nutcoinonsol.com/crypto-backend/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

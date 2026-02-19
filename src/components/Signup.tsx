@@ -53,7 +53,7 @@ const Signup: React.FC = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/send_otp.php', {
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/send_otp.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email }),
@@ -88,7 +88,7 @@ const Signup: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/verify_otp.php', {
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/verify_otp.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email, otp: otp }),
@@ -115,7 +115,7 @@ const Signup: React.FC = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('https://mondayonsol.fun/crypto-backend/signup.php', {
+      const response = await fetch('https://api.nutcoinonsol.com/crypto-backend/signup.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

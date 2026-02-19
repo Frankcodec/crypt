@@ -15,7 +15,7 @@ const AdminTransactions: React.FC = () => {
   const fetchTransactions = async () => {
     setLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/get_all_transactions.php');
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/admin/get_all_transactions.php');
       const data = await res.json();
       
       if (data.success && Array.isArray(data.data)) {
@@ -58,7 +58,7 @@ const AdminTransactions: React.FC = () => {
     if (result.isConfirmed) {
       try {
         const endpoint = `${action}_${type}.php`;
-        const res = await fetch(`https://mondayonsol.fun/crypto-backend/admin/${endpoint}`, {
+        const res = await fetch(`https://api.nutcoinonsol.com/crypto-backend/admin/${endpoint}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ transaction_id: id })

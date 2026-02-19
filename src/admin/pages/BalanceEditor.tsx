@@ -12,7 +12,7 @@ const BalanceEditor = () => {
 
   // Load user list
   useEffect(() => {
-    fetch('https://mondayonsol.fun/crypto-backend/admin/get_users_list.php')
+    fetch('https://api.nutcoinonsol.com/crypto-backend/admin/get_users_list.php')
       .then(res => res.json())
       .then(data => { if (data.success) setUsers(data.users); });
   }, []);
@@ -25,7 +25,7 @@ const BalanceEditor = () => {
     }
     
     setFetching(true);
-    fetch(`https://mondayonsol.fun/crypto-backend/admin/get_user_balance.php?user_id=${selectedUser}`)
+    fetch(`https://api.nutcoinonsol.com/crypto-backend/admin/get_user_balance.php?user_id=${selectedUser}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) setCurrentBalance(data.balance);
@@ -48,7 +48,7 @@ const BalanceEditor = () => {
 
     setLoading(true);
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/admin/update_user_balance.php', {
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/admin/update_user_balance.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

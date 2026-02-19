@@ -20,7 +20,7 @@ const InvestmentDetail: React.FC = () => {
   // 1. Fetch Investment Data
   const fetchInvestment = async () => {
     try {
-      const res = await fetch(`https://mondayonsol.fun/crypto-backend/get_investment_by_id.php?id=${id}`);
+      const res = await fetch(`https://api.nutcoinonsol.com/crypto-backend/get_investment_by_id.php?id=${id}`);
       const data = await res.json();
       if (data.success) {
         setInv(data.data);
@@ -71,7 +71,7 @@ const InvestmentDetail: React.FC = () => {
     });
 
     try {
-      const res = await fetch('https://mondayonsol.fun/crypto-backend/claim_payout.php', {
+      const res = await fetch('https://api.nutcoinonsol.com/crypto-backend/claim_payout.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ investment_id: inv.id, user_id: inv.user_id })
