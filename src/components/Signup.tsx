@@ -77,7 +77,7 @@ const Signup: React.FC = () => {
         Swal.fire('Error', data.message, 'error');
       }
     } catch (error: any) {
-      Swal.fire('Error', 'Connection failed. Check your API path.+' + error.message, 'error');
+      Swal.fire('Error', 'Connection failed. Check your API path.' + error.message, 'error');
     } finally {
       setLoading(false);
     }
@@ -132,6 +132,7 @@ const Signup: React.FC = () => {
         Swal.fire('Signup Failed', data.message, 'error');
       }
     } catch (error) {
+      console.log(error);
       Swal.fire('Error', 'Final signup failed.', 'error');
     } finally {
       setLoading(false);
